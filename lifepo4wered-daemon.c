@@ -126,7 +126,7 @@ int main(int argc, char *argv[]) {
   bool trigger_shutdown = false;
 
 #ifdef SYSTEMD
-  sd_notify(0, "STATUS=Startup");
+  sd_notify(0, "READY=1");
 #endif
 
   /* Run in foreground if -f flag is passed */
@@ -171,6 +171,8 @@ int main(int argc, char *argv[]) {
 
 #ifdef SYSTEMD
     sd_notify(0, "WATCHDOG=1");
+    if (!running)
+      sd_notify(0, "STOPPING=1");
 #endif
     sleep(1);
   }

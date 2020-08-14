@@ -126,7 +126,7 @@ int main(int argc, char *argv[]) {
   bool trigger_shutdown = false;
 
 #ifdef SYSTEMD
-  if (sd_notify(0, "STATUS=Startup") == 0)
+  sd_notify(0, "STATUS=Startup");
 #endif
 
   /* Run in foreground if -f flag is passed */

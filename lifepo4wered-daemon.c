@@ -34,7 +34,7 @@
 
 volatile sig_atomic_t running;
 
-/* Running without forking flag */
+/* Running in foreground flag */
 bool foreground = false;
 
 #define log_info(args...) do { \

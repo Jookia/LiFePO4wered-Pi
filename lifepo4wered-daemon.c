@@ -95,7 +95,7 @@ void system_time_from_rtc(void) {
     /* Set the system time to the RTC time */
     clock_settime(CLOCK_REALTIME, &new_ts);
     /* Log message */
-    log_info("System time restored from RTC: %d", now_time);
+    log_info("System time restored from RTC: %li", new_ts.tv_sec);
   }
 }
 

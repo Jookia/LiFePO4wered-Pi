@@ -13,6 +13,7 @@
 #include <signal.h>
 #include <string.h>
 #include <syslog.h>
+#include <stdlio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "lifepo4wered-data.h"
@@ -37,9 +38,11 @@ volatile sig_atomic_t running;
 bool foreground = false;
 
 #define log_info(fmt, args...) do { \
-  if (foreground) \
+  if (foreground) {\
     fprintf(stdout, args); \
-  else \
+    fprintf(stdout, "\n"); \
+    fflush(stdout); \
+  } else \
     syslog(LOG_INFO, args); \
 } while (0)
 
@@ -126,13 +129,14 @@ int main(int argc, char *argv[]) {
   sd_notify(0, "STATUS=Startup");
 #endif
 
+  /* Run in foreground if -f flag is passed */
   if (argc == 2 && strcmp(argv[1], "-f") == 0)
     foreground = true;
   /* Otherwise fork and detach to run as daemon */
-  else (daemon(0, 0))
+  else if(daemon(0, 0))
     return 1;
 
-  /* Open the syslog if we need to*/
+  /* Open the syslog if we need to */
   if (!foreground)
     openlog("LiFePO4wered", LOG_PID|LOG_CONS, LOG_DAEMON);
 

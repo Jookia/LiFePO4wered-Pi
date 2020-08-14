@@ -133,7 +133,7 @@ int main(int argc, char *argv[]) {
   if (argc == 2 && strcmp(argv[1], "-f") == 0)
     foreground = true;
   /* Otherwise fork and detach to run as daemon */
-  else if(daemon(0, 0))
+  else if (daemon(0, 0))
     return 1;
 
   /* Open the syslog if we need to */

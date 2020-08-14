@@ -125,10 +125,6 @@ void system_time_to_rtc(void) {
 int main(int argc, char *argv[]) {
   bool trigger_shutdown = false;
 
-#ifdef SYSTEMD
-  sd_notify(0, "READY=1");
-#endif
-
   /* Run in foreground if -f flag is passed */
   if (argc == 2 && strcmp(argv[1], "-f") == 0)
     foreground = true;

@@ -37,7 +37,7 @@ volatile sig_atomic_t running;
 /* Running without forking flag */
 bool foreground = false;
 
-#define log_info(fmt, args...) do { \
+#define log_info(args...) do { \
   if (foreground) {\
     fprintf(stdout, args); \
     fprintf(stdout, "\n"); \

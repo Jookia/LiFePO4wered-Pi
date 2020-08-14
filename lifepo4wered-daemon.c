@@ -13,7 +13,7 @@
 #include <signal.h>
 #include <string.h>
 #include <syslog.h>
-#include <stdlio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include "lifepo4wered-data.h"

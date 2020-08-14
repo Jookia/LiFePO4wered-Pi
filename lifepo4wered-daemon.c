@@ -115,15 +115,14 @@ void system_time_to_rtc(void) {
 int main(int argc, char *argv[]) {
   bool trigger_shutdown = false;
 
-  /* If -f is provided, run in foreground */
-  if(argc == 2 && strcmp(argv[1], "-f") == 0)
-    foreground = true;
-
 #ifdef SYSTEMD
   sd_notify(0, "STATUS=Startup");
 #endif
-  /* Fork and detach to run as daemon */
-  if (!foreground && daemon(0, 0))
+
+  if (argc == 2 && strcmp(argv[1], "-f") == 0)
+    foreground = true;
+  /* Otherwise fork and detach to run as daemon */
+  else (daemon(0, 0))
     return 1;
 
   /* Open the syslog */
